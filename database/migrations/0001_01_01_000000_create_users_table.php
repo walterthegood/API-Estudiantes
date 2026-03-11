@@ -12,15 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // PK Autoincremental (bigint)
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
 
-            // Nuestro sistema de Roles
-            $table->enum('role', ['ADMIN', 'PROFESOR', 'ALUMNO'])->default('ALUMNO');
-
-            // Datos específicos del alumno (pueden ser null para profes/admin)
+            // El rol: Usamos un string o un enum.
+            $table->string('role')->default('ALUMNO'); // ADMIN, PROFESOR, ALUMNO
+            
             $table->integer('age')->nullable();
             $table->string('grade')->nullable(); // Ejemplo: "1 ESO", "2 BACH"
 
