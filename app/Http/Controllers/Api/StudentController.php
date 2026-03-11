@@ -68,6 +68,14 @@ class StudentController extends Controller
         return response()->json(['message' => 'Alumno actualizado', 'data' => $alumno]);
     }
 
+    // DELETE (Solo Admin)
+    public function destroy($id)
+    {
+        $alumno = User::where('role', 'ALUMNO')->findOrFail($id);
+        $alumno->delete();
+
+        return response()->json(['message' => 'Alumno eliminado correctamente']);
+    }
 
 }
 
