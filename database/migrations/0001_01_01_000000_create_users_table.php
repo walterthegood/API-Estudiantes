@@ -15,8 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // Nuestro sistema de Roles
+            $table->enum('role', ['ADMIN', 'PROFESOR', 'ALUMNO'])->default('ALUMNO');
+
+            // Datos específicos del alumno (pueden ser null para profes/admin)
+            $table->integer('age')->nullable();
+            $table->string('grade')->nullable(); // Ejemplo: "1 ESO", "2 BACH"
+
             $table->rememberToken();
             $table->timestamps();
         });
