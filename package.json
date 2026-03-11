@@ -1,0 +1,29 @@
+{
+  "name": "api-estudiantes",
+  "version": "1.0.0",
+  "description": "API REST para gestión de incidencias de estudiantes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest --forceExit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walterthegood/API-Estudiantes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/walterthegood/API-Estudiantes/issues"
+  },
+  "homepage": "https://github.com/walterthegood/API-Estudiantes#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0",
+    "supertest": "^7.2.2"
+  }
+}
