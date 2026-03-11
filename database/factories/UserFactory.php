@@ -24,12 +24,26 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $age = fake()->numberBetween(12, 18);
+
+        $gradeMapping = [
+            12 => '1 ESO',
+            13 => '2 ESO',
+            14 => '3 ESO',
+            15 => '4 ESO',
+            16 => '1 BACH',
+            17 => '2 BACH',
+            18 => '2 BACH',
+        ];
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'password' => bcrypt('password'), 
+            'role' => 'ALUMNO',
+            'age' => $age,
+            'grade' => $gradeMapping[$age],
+            'remember_token' => \Illuminate\Support\Str::random(10),
         ];
     }
 
