@@ -15,15 +15,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Creamos 400 usuarios usando la fábrica que 
-        // acabamos de configurar
+        // Creamos 400 usuarios 
         
         \App\Models\User::factory(400)->create();
 
-        // Y un admin para nosotros
+        //los profesores
+        
+        \App\Models\User::factory(20)->create([
+            'role' => 'PROFESOR',
+            'age' => fake()->numberBetween(25, 60),
+            'grade' => null,
+        ]);
+
+
+        // admin 
         \App\Models\User::factory()->create([
-            'name' => 'Admin Sistema',
-            'email' => 'admin@admin.com',
+            'name' => 'Walter Sistema',
+            'email' => 'admin@estudiantes.com',
+            'password' => bcrypt('admin123'), 
             'role' => 'ADMIN',
             'age' => null,
             'grade' => null,
