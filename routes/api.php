@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AbsenceController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Middleware\CheckRole;
@@ -24,5 +25,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/alumnos/{id}', [StudentController::class, 'update']);
         Route::delete('/alumnos/{id}', [StudentController::class, 'destroy']);
     });
+
+    // RUTAS PARA FALTAS
+
+    // RUTA PARA ALUMNOS: Solo ellos pueden entrar aquí para ver sus propias faltas
+    Route::get('/mis-faltas', [AbsenceController::class, 'misFaltas'])
+        ->middleware(CheckRole::class.':ALUMNO');
+
+    // RUTA PARA PROFES/ADMIN: Son los únicos con autoridad para poner faltas
+    Route::post('/faltas', [AbsenceController::class, 'store'])
+        ->middleware(CheckRole::class.':PROFESOR,ADMIN');
 
 });
