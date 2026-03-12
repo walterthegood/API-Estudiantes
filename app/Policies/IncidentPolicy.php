@@ -9,19 +9,25 @@ use Illuminate\Auth\Access\Response;
 class IncidentPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Determine ¿Quién puede ver la LISTA de incidencias?
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        // Admin y Profesor ven todas. Alumno solo puede entrar a la ruta.
+        return true;
     }
 
     /**
-     * Determine whether the user can view the model.
+     * ¿Quién puede ver UNA incidencia concreta?
      */
     public function view(User $user, Incident $incident): bool
     {
-        return false;
+        if ($user->role === 'ADMIN' || $user->role === 'PROFESOR'){
+            return true;
+        }
+        // El alumno SOLO ve la suya 
+        // (su ID debe coincidir con el user_id de la incidencia)
+        return $user->id === $incident->user_id;
     }
 
     /**
@@ -29,7 +35,8 @@ class IncidentPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+       // Solo el Profesor
+        return $user->role === 'PROFESOR';
     }
 
     /**
