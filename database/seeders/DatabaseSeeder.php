@@ -26,7 +26,15 @@ class DatabaseSeeder extends Seeder
             'age' => fake()->numberBetween(25, 60),
             'grade' => null,
         ]);
-
+        
+        \App\Models\User::factory()->create([
+            'name' => 'Walter Profesor',
+            'email' => 'waltersalmon@gmail.com',
+            'password' => bcrypt('profesor123'),
+            'role' => 'PROFESOR',
+            'age' => 23,
+            'grade' => null,
+        ]);
 
         // admin 
         \App\Models\User::factory()->create([
